@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 
 from core.models import Profile, Post, LikePost, FollowersCount
 # from .models import Profile
+from itertools import chain
 
 
 @login_required(login_url='core:signin')
@@ -14,9 +15,30 @@ def index(request):
     # user_object = User.objects.get(username=request.user.username)
     user_profile = Profile.objects.get(user=request.user)
     posts = Post.objects.all()
+
+    user_following_list = []
+    feed = []
+
+    user_following = FollowersCount.objects.filter(user = request.user.username)
+    
+        
+
+    for users in user_following:
+        user_following_list.append(users.follower)
+
+
+    for usernames in user_following_list:
+        feed_lists = Post.objects.filter(user = usernames)
+        feed.append(feed_lists)
+
+
+    feed_list = list(chain(*feed))
+
+
+    
     context = {
         'user_profile': user_profile,
-        'posts': posts,
+        'posts': feed_list,
     }
 
     return render(request, "index.html", context)
@@ -149,11 +171,26 @@ def profile(request, pk):
     User_profile = Profile.objects.get(user = user_objects)
     user_posts = Post.objects.filter(user = pk)
     user_posts_count = len(user_posts)
+
+    user = request.user.username
+    follower = pk
+
+    user_followers = len(FollowersCount.objects.filter(follower = pk))
+    user_following = len(FollowersCount.objects.filter(user = pk))
+
+    if FollowersCount.objects.filter(follower=follower, user = user).first():
+        button = "Unfollow"
+    else:
+        button = "Follow"
+
     context = {
         'user_profile': User_profile,
         'user_objects': user_objects,
         'user_posts': user_posts,
-        'user_posts_count': user_posts_count
+        'user_posts_count': user_posts_count,
+        'button': button,
+        'user_followers': user_followers,
+        'user_following': user_following,
     }
     return render(request, 'profile.html', context)
 
