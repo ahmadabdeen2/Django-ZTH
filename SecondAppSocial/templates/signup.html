@@ -37,7 +37,7 @@
 
                     <div class="capitalize flex font-semibold hidden lg:block my-2 space-x-3 text-center text-sm">
                         
-                        <a href="signin.html" class="bg-pink-500 pink-500 px-6 py-3 rounded-md shadow text-white">Login</a>
+                        <a href="{% url 'core:signin' %}"  class="bg-pink-500 pink-500 px-6 py-3 rounded-md shadow text-white">Login</a>
                     </div>
 
                 </div>
@@ -49,8 +49,18 @@
         <div>
             <div class="lg:p-12 max-w-md max-w-xl lg:my-0 my-12 mx-auto p-6 space-y-">
                 <h1 class="lg:text-3xl text-xl font-semibold mb-6"> Sign Up</h1>
+                {% if messages %}
+
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+
+                    {% endif %}
             
-                <form action="" method='POST'>
+                <form action="" method="POST">
+                    {% csrf_token %}
           
                     <input type="text" name='username' placeholder="Username" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
                     <input type="email" name='email' placeholder="Email" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
