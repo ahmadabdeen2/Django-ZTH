@@ -1,4 +1,4 @@
-My Side Projects Collection :sparkles:
+# My Side Projects Collection :sparkles:
 Welcome to my incredible side projects repository, where I showcase my skills and creativity across a diverse range of technologies. This collection demonstrates my proficiency in Django, Python, JavaScript, React, Next.js, PostgreSQL, MySQL, MongoDB, Prisma, Next-Auth, and more!
 
 :rocket: Table of Contents
@@ -35,9 +35,13 @@ Authentication: Next-Auth
 :mailbox: Contact
 If you have any questions, feedback, or just want to connect, feel free to reach out to me:
 Email: ahmadabdin3@hotmail.com
+
 LinkedIn: https://www.linkedin.com/in/ahmad-abdeen-73a852156
+
 Twitter: @realabdin
+
 Website: https://www.byabdeen.com
+
 I'd love to hear from you and discuss the projects or potential collaborations!
 
 Happy coding! :zap:
