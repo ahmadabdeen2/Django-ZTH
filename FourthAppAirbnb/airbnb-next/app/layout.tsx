@@ -9,6 +9,7 @@ import ToastProvider from './providers/ToastProvider';
 import { Toaster } from 'react-hot-toast';
 import LoginModal from './components/modal/LoginModal';
 import getCurrentUser from './actions/getCurrentUset';
+import RentModal from './components/modal/RentModal';
 
 const poppins = Poppins({
   weight: ['400', '700'],
@@ -31,6 +32,7 @@ export default async function RootLayout({
         <ClientOnly>
           <LoginModal/>
           <RegisterModal/>
+          <RentModal/>
           <ToastProvider/>
         <Navbar currentUser={currentUser}/>
         </ClientOnly>
