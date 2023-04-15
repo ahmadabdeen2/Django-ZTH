@@ -6,6 +6,9 @@ import Heading from "../Heading";
 import { categories } from "../navbar/Categories";
 import CategoryInput from "../CategoryInput";
 import { FieldValues, useForm } from "react-hook-form";
+import CountrySelect from "../inputs/CountrySelect";
+import dynamic from "next/dynamic";
+// import Map from "../Map";
 
 enum STEPS {
   CATEGORY = 0,
@@ -43,14 +46,20 @@ const RentModal = () => {
   });
 
   const category = watch("category");
+  const location = watch("location");
+  const Map = useMemo(() => dynamic(() => import('../Map'), { 
+    ssr: false 
+  }), [location]);
+
+
   console.log(category);
-  const setCustomValue = (id:string, value:any)=>{
+  const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
-        shouldDirty: true,
-        shouldValidate: true,
-        shouldTouch: true,
-    })
-  }
+      shouldDirty: true,
+      shouldValidate: true,
+      shouldTouch: true,
+    });
+  };
 
   const onNext = () => {
     setStep((step) => step + 1);
@@ -80,7 +89,7 @@ const RentModal = () => {
           return (
             <div key={item.label} className="col-span-1">
               <CategoryInput
-                onClick={(category) => setCustomValue('category', category)}
+                onClick={(category) => setCustomValue("category", category)}
                 icon={item.icon}
                 label={item.label}
                 selected={category === item.label}
@@ -91,12 +100,37 @@ const RentModal = () => {
       </div>
     </div>
   );
+  if (step === STEPS.LOCATION) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Where is your listing located?"
+          subtitle="You can always change this later."
+        />
+        <CountrySelect
+          onChange={(value) => setCustomValue("location", value)}
+          value={location}
+        />
+        <Map center={location?.latlng} />
+      </div>
+    );
+  }
+  if (step === STEPS.INFO) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Where is your listing located?"
+          subtitle="You can always change this later."
+        />
+      </div>
+    );
+  }
 
   return (
     <Modal
       isOpen={rentModal.isOpen}
       onClose={rentModal.onClose}
-      onSubmit={rentModal.onClose}
+      onSubmit={onNext}
       actionLabel={actionLabel}
       secondaryActionLabel={secondaryActionLabel}
       secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
