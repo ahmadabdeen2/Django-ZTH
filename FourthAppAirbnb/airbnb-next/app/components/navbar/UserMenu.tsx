@@ -14,7 +14,7 @@ import useRentModal from "@/app/hooks/useRentModal";
 import { useRouter } from "next/navigation";
 
 interface UserMenuProps {
-  currentUser: SafeUser | null | undefined;
+  currentUser: SafeUser | null ;
 }
 const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const registerModal = useRegisterModal();
