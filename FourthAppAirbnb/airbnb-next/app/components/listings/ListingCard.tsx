@@ -1,5 +1,5 @@
 "use client";
-import { SafeUser } from "@/app/types";
+import { SafeListing, SafeUser } from "@/app/types";
 import { Reservation, User } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import useCountries from "@/app/hooks/useCountries";
@@ -10,7 +10,7 @@ import HeartButton from "../HeartButton";
 import Button from "../Button";
 
 interface ListingCardProps {
-  listing: any;
+  listing: SafeListing;
   currentUser?: SafeUser | null;
   reservation?: Reservation;
   onAction?: (id: string) => void;
@@ -82,13 +82,16 @@ rounded-xl
             fill
             alt={listing.title}
           />
-          <div className="absolute top03 right-3">
+          <div className="absolute top-3 right-3">
             <HeartButton listingId={listing.id} currentUser={currentUser} />
           </div>
         </div>
         <div className="font-regular text-sm">{location?.label}</div>
         <div className="font-light text-neutral-500 ">
           {reservationDate || listing.category}
+        </div>
+        <div className="font-light  ">
+          {listing?.title}
         </div>
         <div className="flex flex-row items-center gap-[0.25rem]">
           <div className="font-regular ">${price}</div>

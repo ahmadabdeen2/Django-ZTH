@@ -67,7 +67,7 @@ const RentModal = () => {
     [location]
   );
 
-  console.log(category);
+
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
       shouldDirty: true,
