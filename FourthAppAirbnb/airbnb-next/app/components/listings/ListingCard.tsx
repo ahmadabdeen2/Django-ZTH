@@ -1,5 +1,5 @@
 "use client";
-import { SafeListing, SafeUser } from "@/app/types";
+import { SafeListing, SafeReservation, SafeUser } from "@/app/types";
 import { Reservation, User } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import useCountries from "@/app/hooks/useCountries";
@@ -12,7 +12,7 @@ import Button from "../Button";
 interface ListingCardProps {
   listing: SafeListing;
   currentUser?: SafeUser | null;
-  reservation?: Reservation;
+  reservation?: SafeReservation | null;
   onAction?: (id: string) => void;
   disabled?: boolean;
   actionLabel?: string;
@@ -88,9 +88,9 @@ rounded-xl
         </div>
         <div className="font-regular text-sm">{location?.label}</div>
         <div className="font-light text-neutral-500 ">
-          {reservationDate || listing.category}
+          {reservationDate?.slice(0,27) || listing.category}
         </div>
-        <div className="font-light  ">
+        <div className="font-light">
           {listing?.title}
         </div>
         <div className="flex flex-row items-center gap-[0.25rem]">
