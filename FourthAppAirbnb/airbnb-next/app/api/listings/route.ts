@@ -7,7 +7,7 @@ export async function POST(
     request:Request,
 ){
     const currUser = await getCurrentUser();
-    if(!currUser) return NextResponse.redirect('/login');
+    if(!currUser) return NextResponse.error();
 
     const body = await request.json()
     const {
