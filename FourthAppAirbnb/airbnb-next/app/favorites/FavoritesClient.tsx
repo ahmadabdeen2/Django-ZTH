@@ -50,10 +50,6 @@ const FavoritesClient: React.FC<FavoritesClientProps> = ({
             <ListingCard
                 key={listings.id}
                 listing={listings}
-                actionId= {listings.id}
-                onAction={onCancel}
-                disabled={deletingId === listings.id}
-                actionLabel="Cancel guest"
                 currentUser={currentUser}
              
              />
