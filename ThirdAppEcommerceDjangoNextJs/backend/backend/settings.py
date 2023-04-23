@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 import os
 from pathlib import Path
+from .secrets import DJANGO_SECRET_KEY, JWT_SECRET_KEY
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'h)0*!!bdzs6gqtovw#!$0h66xz-)5-_9sn8jd(r$$&^ht*^@ym'
+SECRET_KEY = DJANGO_SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -44,6 +45,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'products',
     'graphene_django',
+    'rest_framework',
+
 ]
 
 MIDDLEWARE = [
@@ -84,9 +87,9 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
+        'NAME': 'studiodeluz',
         'USER': 'postgres',
-        'PASSWORD': 'postgres',
+        'PASSWORD': 'ahmadov',
         'HOST': 'localhost',
         'PORT': 5432,
     }
